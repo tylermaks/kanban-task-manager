@@ -1,0 +1,122 @@
+//SETUP
+*, *::after, *::before{ 
+    box-sizing: border-box;
+}
+
+html, body{ 
+    min-height: 100vh;
+}
+
+body{ 
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+//COLORS
+$mainPurple: #635fc7;
+$hoverPurple: #A8A4FF;
+$black: #000112;
+$xtraDrkGrey: #20212C;
+$drkGrey: #2B2C37;
+$line: #3E3F4E;
+$mdGrey: #828FA3;
+$ltLines: #E4EBFA;
+$ltGrey:#F4F7FD;
+$mainRed: #EA5555;
+$hoverRed: #FF9898;
+
+//TYPOGRAPHY
+h1, h2, h3, h4, .body-md{
+    font-weight: bold;
+}
+
+h1{ 
+    font-size: 24px;
+    line-height: 30px;
+}
+
+h2{
+    font-size: 18px;
+    line-height: 23px;
+}
+
+h3{
+    font-size: 15px;
+    line-height: 19px;
+}
+
+h4{
+    color: $mdGrey;
+    font-size: 12px;
+    kerning: 2.4px;
+    line-height: 15px;
+}
+
+.body-lg{ 
+    font-size: 13px;
+    line-height: 23px;
+}
+
+.body-md{
+    font-size: 12px;
+    line-height: 15px;
+}
+
+//BUTTONS
+.button{ 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 24px;
+    width: 255px;
+
+    &--lg{
+        font-size: 15px;
+        line-height: 19px;
+    }
+
+    &--sm{
+        font-size: 13px;
+        line-height: 23px;
+    }
+}
+
+.button__primary{ 
+    background-color: $mainPurple;
+    color: #fff;
+
+    &:hover{
+        background-color: $hoverRed;
+    }
+}
+
+.button__secondary{
+    color: $mainPurple;
+
+    &--lt{ 
+        background-color: $ltGrey;
+
+        &:hover{
+            background-color: $mdGrey;
+        }
+    }
+
+    &--dk{
+        background-color: #fff;
+    }
+}
+
+.button__destructive{ 
+    background-color: $mainRed;
+    color: #fff;
+
+    &:hover{
+        background-color:$hoverRed;
+    }
+}
+
+
+//CHECKBOXES
+
+
+//INPUTS & DROPDOWNS
