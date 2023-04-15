@@ -1,0 +1,12 @@
+#layout{ 
+    display:grid;
+    grid-template-columns: 0.25fr 1fr;
+    grid-template-rows: 0.1fr 1fr;
+    grid-template-areas:
+        "menuNav topNav"
+        "menuNav kanban"
+    ;
+
+    min-height: 100vh;
+}
+

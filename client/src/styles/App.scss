@@ -1,6 +1,9 @@
+@import "./variables.scss";
+
 //SETUP
 *, *::after, *::before{ 
     box-sizing: border-box;
+    margin: 0;
 }
 
 html, body{ 
@@ -11,18 +14,27 @@ body{
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-//COLORS
-$mainPurple: #635fc7;
-$hoverPurple: #A8A4FF;
-$black: #000112;
-$xtraDrkGrey: #20212C;
-$drkGrey: #2B2C37;
-$line: #3E3F4E;
-$mdGrey: #828FA3;
-$ltLines: #E4EBFA;
-$ltGrey:#F4F7FD;
-$mainRed: #EA5555;
-$hoverRed: #FF9898;
+.lt-mode{ 
+    &--primary{
+         background-color: #fff;
+    }
+
+    &--secondary{
+        background-color: $ltGrey;
+    }
+}
+
+.drk-mode{
+    &--primary{
+        background-color: $drkGrey;
+        border:1px solid $line;
+    }
+
+    &--secondary{
+        background-color: $xtraDrkGrey;
+    }
+}
+
 
 //TYPOGRAPHY
 h1, h2, h3, h4, .body-md{
@@ -40,6 +52,7 @@ h2{
 }
 
 h3{
+    color: $mdGrey;
     font-size: 15px;
     line-height: 19px;
 }
@@ -47,8 +60,9 @@ h3{
 h4{
     color: $mdGrey;
     font-size: 12px;
-    kerning: 2.4px;
+    letter-spacing: 2.4px;
     line-height: 15px;
+    text-transform: uppercase;
 }
 
 .body-lg{ 
@@ -59,6 +73,31 @@ h4{
 .body-md{
     font-size: 12px;
     line-height: 15px;
+}
+
+//UTILITGY CLASSES
+.flex-row{ 
+    display: flex;
+    align-items: center;
+
+    &--center{
+        justify-content: center;
+    }
+}
+
+.flex-column{
+    display: flex;
+    flex-direction: column;
+    
+    &--space{
+        justify-content: space-between;
+    }
+}
+
+.gap{ 
+    &--1{
+        gap: 1rem;
+    }
 }
 
 //BUTTONS
@@ -120,3 +159,56 @@ h4{
 
 
 //INPUTS & DROPDOWNS
+.label{
+    font-size: 12px;
+    font-weight: bold;
+
+    &--lt{
+        color: $mdGrey;
+    }
+
+    &--dk{
+        color: #fff;
+    }
+}
+
+.input{
+    border: 1px solid $ltLines;
+    border-radius: 4px;
+    color: $ltLines;
+
+    &--lt{
+        &:focus{
+            color: $black;
+        }
+    }
+
+    &--dk{
+        &:focus{
+            color: #fff;
+        }
+    }
+
+    &--error{
+        border: 1px solid $mainRed;
+    }
+}
+
+.select{ 
+    border: 1px solid $ltLines;
+    border-radius: 4px;
+    color: $ltLines;
+
+    &:focus{
+        border: 1px solid $mainPurple;
+    }
+
+    &--lt{
+        color:$black;
+    }
+
+    &--dk{
+        color: #fff;
+    }
+}
+

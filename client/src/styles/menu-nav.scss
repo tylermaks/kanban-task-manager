@@ -1,0 +1,25 @@
+@import "./variables.scss";
+
+#menu-nav{
+    grid-area: menuNav;
+    padding: 1.5rem;
+}
+
+#board-menu{ 
+    margin-top: 3rem;
+}
+
+.board-option{
+    cursor: pointer;
+    gap: 1rem;
+
+    &--create{
+        h3{
+            color: $mainPurple;
+        }
+
+        img{
+            filter: invert(18%) sepia(100%) saturate(5561%) hue-rotate(243deg) brightness(96%) contrast(92%);
+          }
+    }
+}
