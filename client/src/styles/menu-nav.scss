@@ -2,11 +2,12 @@
 
 #menu-nav{
     grid-area: menuNav;
-    padding: 1.5rem;
+    padding: 2rem;
+
 }
 
 #board-menu{ 
-    margin-top: 3rem;
+    margin-top: 3.5rem;
 }
 
 .board-option{
@@ -21,5 +22,17 @@
         img{
             filter: invert(18%) sepia(100%) saturate(5561%) hue-rotate(243deg) brightness(96%) contrast(92%);
           }
+    }
+}
+
+
+.toggle-sidebar{ 
+    cursor: pointer;
+}
+
+
+@media only screen and (max-width: 375px){ 
+    #menu-nav{
+        display: none;
     }
 }

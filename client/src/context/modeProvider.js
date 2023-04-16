@@ -11,10 +11,17 @@ export const ModeProvider = ({ children }) => {
 
     const lightModePrimary = lightMode ? "lt-mode--primary" : "drk-mode--primary"
     const lightModeSecondary = lightMode ? "lt-mode--secondary" : "drk-mode--secondary"
+    const lightModeText = lightMode ? "lt-mode--text" : "drk-mode--text"
     //Add buttons, inputs, and select
 
     return (
-        <ModeContext.Provider value = {{ lightMode, lightModePrimary, lightModeSecondary, toggleLightMode }}>
+        <ModeContext.Provider value = {{ 
+            lightMode, 
+            lightModePrimary, 
+            lightModeSecondary, 
+            lightModeText,
+            toggleLightMode 
+        }}>
             {children}
         </ModeContext.Provider>
     )

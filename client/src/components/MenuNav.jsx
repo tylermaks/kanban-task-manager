@@ -3,23 +3,31 @@ import LightModeToggle from "./LightModeToggle"
 import useLightMode from "../hook/useLightMode"
 import logoDark from "../assets/logo-light.svg"
 import logoLight from "../assets/logo-dark.svg"
+import hideIcon from "../assets/icon-hide-sidebar.svg"
+
 import "../styles/menu-nav.scss"
 
-function MenuNav(){
+function MenuNav({ toggleSidebar }){
     const { lightMode, lightModePrimary } = useLightMode()
-
     const logoSource = lightMode ? logoLight : logoDark
 
+    
+ 
+
     return(
-        <section id="menu-nav" className={`${lightModePrimary} flex-column flex-column--space`}>
+        <section id="menu-nav" className={`${lightModePrimary} flex-column flex-column--space`}>  
             <div>
                 <img src={logoSource} alt="Kanban Logo" />
                 <AllBoards />
             </div>
             <div>
                 <LightModeToggle />
+                <div onClick={toggleSidebar} className="toggle-sidebar flex-row flex-row--cente gap--1">
+                    <img src={hideIcon} alt="Hide sidebar" />
+                    <h3>Hide Sidebar</h3>
+                </div>
             </div>
-        </section>  
+        </section>
     )
 }
 

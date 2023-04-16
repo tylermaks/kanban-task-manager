@@ -1,12 +1,49 @@
-#layout{ 
-    display:grid;
-    grid-template-columns: 0.25fr 1fr;
-    grid-template-rows: 0.1fr 1fr;
-    grid-template-areas:
-        "menuNav topNav"
-        "menuNav kanban"
-    ;
+@import "./variables.scss";
 
+.layout{ 
+    display:grid;
     min-height: 100vh;
+    position: relative;
+
+    &--show-sidebar{
+        grid-template-columns: 0.25fr 1fr;
+        grid-template-rows: 0.1fr 1fr;
+        grid-template-areas:
+            "menuNav topNav"
+            "menuNav kanban"
+        ;
+    }
+
+    &--hide-sidebar{
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.1fr 1fr;
+        grid-template-areas:
+            "topNav"
+            "kanban"
+        ;
+    }
 }
 
+.show-sidebar{ 
+    position:absolute;
+    bottom: 4rem;
+    left: 0;
+    
+    cursor: pointer;
+    background-color: $mainPurple;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    height: 3rem;
+    width: 3.5rem;
+}
+
+@media only screen and (max-width: 375px){
+    .layout{
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.1fr 1fr;
+        grid-template-areas:
+            "topNav"
+            "kanban"
+        ;
+    }
+}
