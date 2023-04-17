@@ -104,11 +104,20 @@ h4{
     &--space{
         justify-content: space-between;
     }
+
+    &--center{
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 .gap{ 
     &--1{
         gap: 1rem;
+    }
+
+    &--2{
+        gap: 2rem;
     }
 }
 
