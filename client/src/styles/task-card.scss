@@ -1,5 +1,16 @@
+@import "./variables.scss";
+
 .task-card{ 
-    border: unset;
+    border: unset !important;
     border-radius: 4px;
+    cursor:pointer;
     padding: 1rem;
+
+    h3{
+        color: #fff;
+    }
+
+    p{
+        color: $mdGrey;
+    }
 }

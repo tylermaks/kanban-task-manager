@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { ModeProvider } from '../context/modeProvider'
+import { BoardProvider } from '../context/boardProvider'
 import MenuNav from './MenuNav'
 import TopNav from './TopNav'
 import KanbanBoard from './KanbanBoard'
@@ -13,16 +14,18 @@ function Layout(){
     }
 
     return(
-        <ModeProvider>
-            <main className={sidebar ? "layout layout--show-sidebar" : "layout layout--hide-sidebar"}>
-                {sidebar && <MenuNav toggleSidebar={toggleSidebar}/>}
-                <TopNav />
-                <KanbanBoard 
-                    sidebar={sidebar}
-                    toggleSidebar={toggleSidebar}
-                />
-            </main>
-        </ModeProvider>
+        <BoardProvider>
+            <ModeProvider>
+                <main className={sidebar ? "layout layout--show-sidebar" : "layout layout--hide-sidebar"}>
+                    {sidebar && <MenuNav toggleSidebar={toggleSidebar}/>}
+                    <TopNav />
+                    <KanbanBoard 
+                        sidebar={sidebar}
+                        toggleSidebar={toggleSidebar}
+                    />
+                </main>
+            </ModeProvider>
+        </BoardProvider>
     )
 }
 

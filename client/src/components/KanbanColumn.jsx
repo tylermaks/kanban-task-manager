@@ -5,7 +5,7 @@ function KanbanColumn() {
     return(
         <section className="flex-column gap--1">
             <div>
-                <h4>ToDo</h4>
+                <h4 className="column-header">ToDo (1)</h4>
             </div>
             <TaskCard />
         </section>

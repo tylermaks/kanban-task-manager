@@ -13,6 +13,8 @@
 .board-option{
     cursor: pointer;
     gap: 1rem;
+    padding: 0.5rem;
+    position: relative;
 
     &--create{
         h3{
@@ -22,6 +24,31 @@
         img{
             filter: invert(18%) sepia(100%) saturate(5561%) hue-rotate(243deg) brightness(96%) contrast(92%);
           }
+    }
+
+    &--active{
+        background-color: $mainPurple;
+        border-top-right-radius: 2rem;
+        border-bottom-right-radius: 2rem;
+
+        &::before{
+            background-color: $mainPurple;
+            content: "";
+            width: 60px;
+
+            position: absolute;
+            top:0;
+            bottom:0;
+            left: -50px;
+        }
+
+        h3{
+            color: #fff !important;
+        }
+
+        img {
+            filter: brightness(200%);
+        }       
     }
 }
 

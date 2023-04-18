@@ -9,9 +9,9 @@ function LightModeToggle () {
     return(
         <div id="toggle-container" className={`${lightModeSecondary} flex-row flex-row--center gap--1`}>
             <img src={lightIcon} alt="Set app to light mode" />
-            <label class="switch">
+            <label className="switch">
                 <input onClick={toggleLightMode} type="checkbox"/>
-                <span class="slider round"></span>
+                <span className="slider round"></span>
             </label>
             <img src={darkIcon} alt="Set app to dark mode" />
         </div>
