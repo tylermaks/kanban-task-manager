@@ -4,11 +4,8 @@
     border: unset !important;
     border-radius: 4px;
     cursor:pointer;
+    gap: 0.5rem;
     padding: 1rem;
-
-    h3{
-        color: #fff;
-    }
 
     p{
         color: $mdGrey;

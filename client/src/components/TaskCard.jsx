@@ -1,13 +1,18 @@
 import useLightMode from "../hook/useLightMode"
 import "../styles/task-card.scss"
 
-function TaskCard(){
+function TaskCard({ title, description, status, subtasks }){
     const { lightModePrimary, lightModeText } = useLightMode()
-
+    const subtaskCount = subtasks.length
+    const completedsubtasksCount = subtasks.reduce((acc, curr) => {
+        return acc + (curr.isCompleted ? 1 : 0)
+    }, 0)
+ 
+    
     return(
-        <div className={`${lightModePrimary} ${lightModeText} task-card flex-column gap--1`}>
-            <h3>Build UI for onboarding flow</h3 >
-            <p className="body-lg">0 of 3 subtask complete</p>
+        <div className={`${lightModePrimary} task-card flex-column`}>
+            <h3 className={lightModeText}>{title}</h3 >
+            <p className="body-lg">{`${completedsubtasksCount} of ${subtaskCount} subtask complete`}</p>           
         </div>
     )
 }

@@ -1,22 +1,20 @@
-import useBoard from "../hook/useBoard"
+import useBoardData from "../hook/useBoardData"
 import boardIcon from "../assets/icon-board.svg"
-import data from "../data.json"
 import "../styles/menu-nav.scss"
 
 function BoardMenu(){
-    const { selectedBoard, handleBoardToggle } = useBoard()
-    const allBoardsNum = data?.boards.length
+    const { activeBoard, boardList, handleBoardToggle } = useBoardData()
 
-    console.log(selectedBoard)
+
     return <section id="board-menu" className="flex-column gap--1">
-        <h4>{`All Boards (${allBoardsNum})`}</h4>
+        <h4>{`All Boards (${boardList.length})`}</h4>
         {
-            data && data.boards.map((board, id) => {
+            boardList && boardList.map((board, id) => {
                 return(
                     <div 
                         key={id} 
                         id={id} 
-                        className={selectedBoard === id 
+                        className={activeBoard === id 
                             ? "board-option board-option--active flex-row"
                             : "board-option flex-row" 
                             
