@@ -14,6 +14,21 @@ function AddNewTask() {
         description: "e.g. It's always good to teak a break. This 15 minute break will recharge the batteries"
     }
 
+    const handleNewSubtask = () => {
+        setSubtaskList([...subtaskList, "Add new substask"])
+    }
+
+    const setSubtasks = (e, index) => {
+        const { value } = e.target
+        const subtaskValues = [...subtaskList]
+        subtaskValues[index] = value
+        setSubtaskList(subtaskValues)
+    }
+
+    // const deleteSubTask = () => {
+
+    // }
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -25,14 +40,13 @@ function AddNewTask() {
         }
 
     }
-    
 
     return(
         <section>
             <h2 className={lightModeText}>Add New Task</h2>
-            <form>
+            <form className="flex-column gap--1">
                 <div>
-                    <label htmlFor="title">Title</label>
+                    <label className={lightModeText} htmlFor="title">Title</label>
                     <input 
                         name="title" 
                         type="text" 
@@ -43,7 +57,7 @@ function AddNewTask() {
                     />
                 </div>
                 <div>
-                    <label htmlFor="description">Description</label>
+                    <label className={lightModeText} htmlFor="description">Description</label>
                     <textarea
                         name="description"
                         onChange={(e) => setDescription(e.target.value)}
@@ -51,25 +65,29 @@ function AddNewTask() {
                         placeholder={placeholderText.description} 
                     />
                 </div>
-                <div>
-                    <label htmlFor="">Subtasks</label>
+                <div className="subtask-container">
+                    <label className={lightModeText} htmlFor="">Subtasks</label>
                     { 
                         subtaskList.map( (subtask, id) => {
                             return(
-                                <div key={id} className="flex-row flex-row--space">
-                                    <input type="text" placeholder={subtask}/> 
+                                <div key={id} className="subtask flex-row flex-row--space gap--1">
+                                    <input 
+                                        type="text" 
+                                        placeholder={subtask}
+                                        onChange={(e) => setSubtasks(e, id)}
+                                    /> 
                                     <img src={crossIcon} alt="Delete subtask" />
                                 </div>
                             )
                         })
                     }
-                    <div className="button button--sm button__secondary">
+                    <div onClick={handleNewSubtask} className="button button--sm button__secondary button__secondary--dk">
                         + Add New Subtask
                     </div>
                 </div>
 
                 <div>
-                    <label htmlFor="">Status</label>
+                    <label className={lightModeText} htmlFor="">Status</label>
                     <select 
                         name="status-dropdown" 
                         id="status-dropdown"
@@ -78,8 +96,10 @@ function AddNewTask() {
                         <option value="todo">Todo</option>
                     </select>
                 </div>
-                <button  className="">Create Task</button>
+                <button  className="button button--sm button__primary">Create Task</button>
             </form>
         </section>
     )
 }
+
+export default AddNewTask

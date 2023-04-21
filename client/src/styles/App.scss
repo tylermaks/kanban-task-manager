@@ -138,18 +138,20 @@ h4{
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.825rem;
-
+  
+    border: none;
     border-radius: 24px;
     cursor: pointer;
     width: 164px;
 
     &--lg{
+        padding: 0.825rem;
         font-size: 15px;
         line-height: 19px;
     }
 
     &--sm{
+        padding: 0.25rem;
         font-size: 13px;
         line-height: 23px;
     }
@@ -157,6 +159,7 @@ h4{
 
 .button__primary{ 
     background-color: $mainPurple;
+    color: #fff;
     
     *{
         color: #fff;
@@ -193,13 +196,13 @@ h4{
 }
 
 
-//CHECKBOXES
-
 
 //INPUTS & DROPDOWNS
-.label{
+label{
+    display: block;
     font-size: 12px;
     font-weight: bold;
+    margin-bottom: 0.5rem;
 
     &--lt{
         color: $mdGrey;
@@ -210,10 +213,18 @@ h4{
     }
 }
 
-.input{
-    border: 1px solid $ltLines;
+input, textarea{
+    background-color: transparent;
+    border: 1px solid rgba(130,143,163, 0.25);
     border-radius: 4px;
-    color: $ltLines;
+    color: rgba(130,143,163, 0.25);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    padding: 0.5rem;
+    width: 100%;
+
+    &::placeholder{
+        color: rgba(130,143,163, 0.25);
+    }
 
     &--lt{
         &:focus{
@@ -232,10 +243,13 @@ h4{
     }
 }
 
-.select{ 
+select{ 
+    background-color: transparent;
     border: 1px solid $ltLines;
     border-radius: 4px;
     color: $ltLines;
+    padding: 0.5rem;
+    width: 100%;
 
     &:focus{
         border: 1px solid $mainPurple;
