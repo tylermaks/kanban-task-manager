@@ -18,6 +18,8 @@
     padding: 2rem;
     width: 40%;
     max-width: 480px;
+    max-height: 700px;
+    overflow: scroll;
 
     h2{
         margin-bottom: 2rem;
@@ -33,6 +35,10 @@
 
         &::placeholder{
             color: rgba(130,143,163, 0.25);
+        }
+
+        &:focus{
+            outline: 1px solid #fff;
         }
     }
 
@@ -76,4 +82,8 @@
 
 .subtask{
     margin-bottom: 1rem;
+
+    img{
+        cursor: pointer;
+    }
 }

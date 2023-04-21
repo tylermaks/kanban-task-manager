@@ -1,13 +1,16 @@
 import { useState } from "react"
 import useLightMode from "../hook/useLightMode"
+import useBoardData from "../hook/useBoardData"
 import crossIcon from "../assets/icon-cross.svg"
 
-function AddNewTask() {
+function AddNewTask({ setModal }) {
     const { lightModeText } = useLightMode()
+    const { columns, setColumns } = useBoardData()
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [subtaskList, setSubtaskList] = useState(["e.g. Make coffee", "e.g. Drink coffee"])
-    const [status, setStatus] = useState('')
+    const [status, setStatus] = useState('Todo')
+    const [columnId, setColumnId] = useState(0)
 
     const placeholderText = {
         title: "e.g. Take coffee break",
@@ -25,20 +28,38 @@ function AddNewTask() {
         setSubtaskList(subtaskValues)
     }
 
-    // const deleteSubTask = () => {
+    const deleteSubTask = (id) => {
+        const updatedSubtasklist = [...subtaskList]
+        updatedSubtasklist.splice(id, 1)
+        setSubtaskList(updatedSubtasklist)
+    }
 
-    // }
+    const handleDropdown = (e) => { 
+        setStatus(e.target.value)
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-
+        const columnID = columns.findIndex((col) => col.name === status)
+        const prevTaskList = columns[columnID].tasks
         const newTask = { 
             title: title,
             description: description, 
-            subtasks: subtaskList,
             status: status,
+            subtasks: subtaskList,
         }
 
+        columns[columnID] = { 
+            ...columns[columnID],
+            tasks: [...prevTaskList, newTask]
+        }
+
+        setColumns(columns)
+        setTitle('')
+        setDescription('')
+        setSubtaskList(["e.g. Make coffee", "e.g. Drink coffee"])
+        setStatus('Todo')
+        setModal(false)
     }
 
     return(
@@ -63,6 +84,7 @@ function AddNewTask() {
                         onChange={(e) => setDescription(e.target.value)}
                         value={description}
                         placeholder={placeholderText.description} 
+                        required
                     />
                 </div>
                 <div className="subtask-container">
@@ -75,8 +97,13 @@ function AddNewTask() {
                                         type="text" 
                                         placeholder={subtask}
                                         onChange={(e) => setSubtasks(e, id)}
+                                        required
                                     /> 
-                                    <img src={crossIcon} alt="Delete subtask" />
+                                    <img 
+                                        src={crossIcon} 
+                                        alt="Delete subtask" 
+                                        onClick={() => deleteSubTask(id)}
+                                    />
                                 </div>
                             )
                         })
@@ -91,12 +118,18 @@ function AddNewTask() {
                     <select 
                         name="status-dropdown" 
                         id="status-dropdown"
-                        onChange={(e) => setStatus(e.target.value)}
+                        onChange={(e) => handleDropdown(e)}
                     >
-                        <option value="todo">Todo</option>
+                        {
+                            columns && columns.map((column, id) => { 
+                                return(
+                                    <option key={id}>{column.name}</option>
+                                )
+                            })
+                        }
                     </select>
                 </div>
-                <button  className="button button--sm button__primary">Create Task</button>
+                <button onClick={handleSubmit} className="button button--sm button__primary">Create Task</button>
             </form>
         </section>
     )

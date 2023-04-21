@@ -9,7 +9,7 @@ import "../styles/layout.scss"
 
 function Layout(){
     const [sidebar, setSidebar] = useState(true)
-    const [modal, setModal] = useState(true)
+    const [modal, setModal] = useState(false)
     // const [modalContent, setModalContent] = useState()
 
     const toggleSidebar = () => {
@@ -21,7 +21,7 @@ function Layout(){
             <ModeProvider>
                 <main className={sidebar ? "layout layout--show-sidebar" : "layout layout--hide-sidebar"}>
                     {sidebar && <MenuNav toggleSidebar={toggleSidebar}/>}
-                    {modal && <Modal /> }
+                    {modal && <Modal setModal={setModal} /> }
                     <TopNav />
                     <KanbanBoard 
                         sidebar={sidebar}
