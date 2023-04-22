@@ -4,7 +4,7 @@ import useBoardData from "../hook/useBoardData"
 import showIcon from "../assets/icon-show-sidebar.svg"
 import "../styles/kanban.scss"
 
-function KanbanBoard({ sidebar, toggleSidebar }){
+function KanbanBoard({ sidebar, toggleSidebar, setModalContent }){
     const { lightModeSecondary, lightModeText } = useLightMode()
     const { columns } = useBoardData()
     const kanbanColumns = [1]
@@ -29,6 +29,7 @@ function KanbanBoard({ sidebar, toggleSidebar }){
                                 key={id}
                                 name={column.name}
                                 tasks={column.tasks}
+                                setModalContent={setModalContent}
                             />
                         )
                     }) : (

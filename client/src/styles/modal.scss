@@ -6,7 +6,7 @@
     left: 0; 
     z-index: 2;
 
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.7);
     width: 100vw;
     min-height: 100%;
 }
@@ -21,11 +21,11 @@
     max-height: 700px;
     overflow: scroll;
 
-    h2{
-        margin-bottom: 2rem;
-    }
+    // h2{
+    //     margin-bottom: 2rem;
+    // }
 
-    input, select, textarea{
+    input[type='text'], select, textarea{
         background-color: transparent;
         border: 1px solid rgba(130,143,163, 0.25);
         border-radius: 4px;
@@ -54,9 +54,45 @@
         margin-bottom: 0.5rem;
     }
 
+    img{
+        cursor: pointer;
+    }
+
+    .checkbox-container{ 
+        background-color: $xtraDrkGrey;
+        border-radius: 4px;
+        margin-bottom: 0.5rem;
+        padding: 0.75rem;
+        width: 100%;
+
+        input[type='checkbox']{
+            appearance: none;
+            width: unset;
+
+            &:checked{
+                background-image:  url('../assets/icon-check.svg');
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-color: $mainPurple;
+            }
+
+            &:checked + label{ 
+                color: $mdGrey;
+                text-decoration: line-through;
+            }
+        }
+
+  
+
+        label{
+            margin-bottom: 0;
+        }
+    }
+
     .button{
         width: 100%;
     }
+
 
 
     &--lt{
@@ -76,6 +112,10 @@
 
         h2, label, input, select, textarea{
             color: #fff;
+        }
+
+        p{
+            color: $mdGrey;
         }
     }
 }

@@ -8,13 +8,10 @@ export const BoardProvider = ({ children }) => {
     const [activeBoard, setActiveBoard] = useState(0)
     const [boardList, setBoardList] = useState(boardData)
     const [columns, setColumns] = useState(boardData[activeBoard].columns)
-
-
-
+   
     useEffect(() => { 
         localStorage.setItem("boardList", JSON.stringify(boardList))
         localStorage.setItem("columns", JSON.stringify(columns))
-        console.log(columns)
     }, [boardList, columns])
 
     useEffect(() => {

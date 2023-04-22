@@ -3,14 +3,13 @@ import useLightMode from "../hook/useLightMode"
 import useBoardData from "../hook/useBoardData"
 import crossIcon from "../assets/icon-cross.svg"
 
-function AddNewTask({ setModal }) {
+function AddNewTask({ toggleModal }) {
     const { lightModeText } = useLightMode()
     const { columns, setColumns } = useBoardData()
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [subtaskList, setSubtaskList] = useState(["e.g. Make coffee", "e.g. Drink coffee"])
     const [status, setStatus] = useState('Todo')
-    const [columnId, setColumnId] = useState(0)
 
     const placeholderText = {
         title: "e.g. Take coffee break",
@@ -59,7 +58,7 @@ function AddNewTask({ setModal }) {
         setDescription('')
         setSubtaskList(["e.g. Make coffee", "e.g. Drink coffee"])
         setStatus('Todo')
-        setModal(false)
+        toggleModal()
     }
 
     return(
