@@ -5,9 +5,8 @@ import "../styles/menu-nav.scss"
 function BoardMenu(){
     const { activeBoard, boardList, handleBoardToggle } = useBoardData()
 
-
     return <section id="board-menu" className="flex-column gap--1">
-        <h4>{`All Boards (${boardList.length})`}</h4>
+        <h4>{`All Boards (${boardList?.length})`}</h4>
         {
             boardList && boardList.map((board, id) => {
                 return(
@@ -17,7 +16,6 @@ function BoardMenu(){
                         className={activeBoard === id 
                             ? "board-option board-option--active flex-row"
                             : "board-option flex-row" 
-                            
                         }
                         onClick={() => handleBoardToggle(id)}
                     >

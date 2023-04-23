@@ -4,34 +4,33 @@ import data from "../data.json"
 const BoardContext = createContext({})
 
 export const BoardProvider = ({ children }) => {
-    const boardData = data?.boards
+    const [refreshApp, setRefreshApp] = useState(0)
     const [activeBoard, setActiveBoard] = useState(0)
-    const [boardList, setBoardList] = useState(boardData)
-    const [columns, setColumns] = useState(boardData[activeBoard].columns)
+    const [boardList, setBoardList] = useState([])
+    const [columns, setColumns] = useState([])
    
     useEffect(() => { 
-        localStorage.setItem("boardList", JSON.stringify(boardList))
-        localStorage.setItem("columns", JSON.stringify(columns))
-    }, [boardList, columns])
-
-    useEffect(() => {
-        const storedBoardList = JSON.parse(localStorage.getItem('boardList'))
-        const storedColumns = JSON.parse(localStorage.getItem('columns'))
-
-        storedBoardList && setBoardList(storedBoardList)
-        storedColumns && setColumns(storedColumns)
+        localStorage.getItem('appData') === null && localStorage.setItem("appData", JSON.stringify(data))
     }, [])
 
     useEffect(() => {
-        setColumns(boardData[activeBoard].columns)
-    }, [activeBoard, boardData])
+        const storedAppData = JSON.parse(localStorage.getItem('appData'))
+        setBoardList(storedAppData.boards)
+        setColumns(storedAppData.boards[activeBoard].columns)
+    }, [activeBoard, refreshApp])
+
 
     const handleBoardToggle = (id) => { 
         setActiveBoard(id)
     }
 
+    const handleRefresh = () => {
+        setRefreshApp(refreshApp + 1)
+    }
+
     return (
         <BoardContext.Provider value = {{ 
+            handleRefresh,
             activeBoard, 
             boardList,
             columns,

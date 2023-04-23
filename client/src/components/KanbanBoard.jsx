@@ -9,7 +9,6 @@ function KanbanBoard({ sidebar, toggleSidebar, setModalContent }){
     const { columns } = useBoardData()
     const kanbanColumns = [1]
 
-
     return(
         <section 
             id="kanban" 
@@ -20,7 +19,6 @@ function KanbanBoard({ sidebar, toggleSidebar, setModalContent }){
             <div onClick={toggleSidebar} className={sidebar ? "hidden" : "show-sidebar flex-row flex-row--center"}>
                 <img src={showIcon} alt="Show Sidebar" />
             </div>
-
             {
                 columns && columns.length > 0
                     ? columns.map( (column, id) => {
