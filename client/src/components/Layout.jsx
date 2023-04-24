@@ -12,8 +12,6 @@ function Layout(){
     const [modal, setModal] = useState(false)
     const [modalContent, setModalContent] = useState({})
 
-
-
     const toggleSidebar = () => {
         setSidebar(!sidebar)
     }

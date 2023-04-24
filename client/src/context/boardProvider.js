@@ -6,6 +6,7 @@ const BoardContext = createContext({})
 export const BoardProvider = ({ children }) => {
     const [refreshApp, setRefreshApp] = useState(0)
     const [activeBoard, setActiveBoard] = useState(0)
+    const [appData, setAppData] = useState([])
     const [boardList, setBoardList] = useState([])
     const [columns, setColumns] = useState([])
    
@@ -17,6 +18,7 @@ export const BoardProvider = ({ children }) => {
         const storedAppData = JSON.parse(localStorage.getItem('appData'))
         setBoardList(storedAppData.boards)
         setColumns(storedAppData.boards[activeBoard].columns)
+        setAppData(storedAppData)
     }, [activeBoard, refreshApp])
 
 

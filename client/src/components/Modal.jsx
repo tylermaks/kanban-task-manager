@@ -3,10 +3,11 @@ import CardDetails from "./CardDetails"
 import useLightMode from "../hook/useLightMode"
 import "../styles/modal.scss"
 
-function Modal({ toggleModal, modalType, data }) {
+function Modal({ toggleModal, modalType, data, setModal }) {
     const { lightModeModal } = useLightMode()
     const modalComponents = {
-        "cardDetail": <CardDetails data={data} />
+        "cardDetail": <CardDetails data={data} setModal={setModal}/>
+        // "deleteCard": <DeleteCard />
     }
 
     return(

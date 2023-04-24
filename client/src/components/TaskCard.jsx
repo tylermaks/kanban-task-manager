@@ -3,7 +3,7 @@ import Modal from "./Modal"
 import useLightMode from "../hook/useLightMode"
 import "../styles/task-card.scss"
 
-function TaskCard({ taskData, task, subtasks, setModalContent }){
+function TaskCard({ taskData, task, subtasks }){
     const { lightModePrimary, lightModeText } = useLightMode()
     const [modal, setModal] = useState(false)
     const subtaskCount = subtasks.length
@@ -17,7 +17,7 @@ function TaskCard({ taskData, task, subtasks, setModalContent }){
 
     return(
         <div onClick={toggleModal} className={`${lightModePrimary} task-card flex-column`}>
-            {modal && <Modal modalType="cardDetail" data={task} />}
+            {modal && <Modal modalType="cardDetail" data={task} setModal={setModal} />}
             <h3 className={lightModeText}>{task.title}</h3 >
             <p className="body-lg">{`${completedsubtasksCount} of ${subtaskCount} subtask complete`}</p>           
         </div>
