@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { ModeProvider } from '../context/modeProvider'
 import { BoardProvider } from '../context/boardProvider'
+import { ModalProvider } from "../context/modalProvider"
 import MenuNav from './MenuNav'
 import TopNav from './TopNav'
 import KanbanBoard from './KanbanBoard'
@@ -23,18 +24,20 @@ function Layout(){
     return(
         <BoardProvider>
             <ModeProvider>
-                <main className={sidebar ? "layout layout--show-sidebar" : "layout layout--hide-sidebar"}>
-                    {sidebar && <MenuNav toggleSidebar={toggleSidebar}/>}
-                    {modal && <Modal toggleModal={toggleModal} modalContent={modalContent}/> }
-                    <TopNav 
-                        toggleModal={toggleModal}
-                    />
-                    <KanbanBoard 
-                        sidebar={sidebar}
-                        toggleSidebar={toggleSidebar}
-                        setModalContent={setModalContent}
-                    />
-                </main>
+                <ModalProvider>
+                    <main className={sidebar ? "layout layout--show-sidebar" : "layout layout--hide-sidebar"}>
+                        {sidebar && <MenuNav toggleSidebar={toggleSidebar}/>}
+                        {modal && <Modal toggleModal={toggleModal} modalContent={modalContent}/> }
+                        <TopNav 
+                            toggleModal={toggleModal}
+                        />
+                        <KanbanBoard 
+                            sidebar={sidebar}
+                            toggleSidebar={toggleSidebar}
+                            setModalContent={setModalContent}
+                        />
+                    </main>
+                </ModalProvider>    
             </ModeProvider>
         </BoardProvider>
     )

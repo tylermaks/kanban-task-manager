@@ -1,9 +1,10 @@
 import { useState } from "react"
+import CardOptions from "./CardOptions"
 import Modal from "./Modal"
 import useLightMode from "../hook/useLightMode"
 import "../styles/task-card.scss"
 
-function TaskCard({ taskData, task, subtasks }){
+function TaskCard({ task, subtasks }){
     const { lightModePrimary, lightModeText } = useLightMode()
     const [modal, setModal] = useState(false)
     const subtaskCount = subtasks.length
@@ -14,6 +15,7 @@ function TaskCard({ taskData, task, subtasks }){
     const toggleModal = () => {
         setModal(!modal)
     }
+
 
     return(
         <div onClick={toggleModal} className={`${lightModePrimary} task-card flex-column`}>
