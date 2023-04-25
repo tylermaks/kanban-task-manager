@@ -1,22 +1,23 @@
-// import AddNewTask from "./AddNewTask"
 import useModal from "../hook/useModal"
 import CardDetails from "./CardDetails"
+import AddNewTask from "./AddNewTask"
 import useLightMode from "../hook/useLightMode"
 import "../styles/modal.scss"
-import AddNewTask from "./AddNewTask"
 
-function Modal({ toggleModal, data, setModal }) {
+function Modal({ toggleModal, modalContent, data, setModal }) {
     const { lightModeModal } = useLightMode()
     const { modalInner } = useModal()
     const modalComponents = {
         "cardDetail": <CardDetails data={data} setModal={setModal} />,
-   
+        "add": <AddNewTask content={modalContent.componentType}/>
     }
+
+    console.log(modalContent.formType)
 
     return(
         <section onClick={toggleModal} className="modal-container flex-row flex-row--center">
             <div className={lightModeModal} onClick={e => e.stopPropagation()}>
-                {modalComponents[modalInner]}
+                {modalComponents[modalContent.formType]}
             </div>
         </section>
     )

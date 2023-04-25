@@ -11,13 +11,16 @@ import "../styles/layout.scss"
 function Layout(){
     const [sidebar, setSidebar] = useState(true)
     const [modal, setModal] = useState(false)
-    const [modalContent, setModalContent] = useState({})
+    const [modalContent, setModalContent] = useState()
 
     const toggleSidebar = () => {
         setSidebar(!sidebar)
     }
 
-    const toggleModal = () => {
+    const toggleModal = (e) => {
+        const formType = e.target.getAttribute('data-form-type')
+        const componentType = e.target.getAttribute('data-component-type')
+        setModalContent({formType:formType, componentType:componentType})
         setModal(!modal)
     }
 
