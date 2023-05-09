@@ -11,7 +11,7 @@ import "../styles/modal.scss"
 //6. Consider making dropdown into it's own component -- set default option set to the column name
 
 
-function CardDetails({ data, setModal, toggleOptions, options }){
+function CardDetails({ data, setModal }){
     const { columns, activeBoard, handleRefresh } = useBoardData()
     const storedAppData = JSON.parse(localStorage.getItem('appData'))
     const columnID = columns.findIndex((col) => col.name === data.status) 

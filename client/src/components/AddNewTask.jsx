@@ -3,7 +3,7 @@ import useLightMode from "../hook/useLightMode"
 import useBoardData from "../hook/useBoardData"
 import crossIcon from "../assets/icon-cross.svg"
 
-function AddNewTask({ toggleModal, modalComponent }) {
+function AddNewTask() {
     const { lightModeText } = useLightMode()
     const { columns, setColumns } = useBoardData()
     const [title, setTitle] = useState('')

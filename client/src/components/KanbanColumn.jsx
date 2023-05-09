@@ -1,7 +1,7 @@
 import TaskCard from "./TaskCard"
 import "../styles/kanban-column.scss"
 
-function KanbanColumn({ name, tasks, setModalContent}) { 
+function KanbanColumn({ name, tasks, toggleModal }) { 
     return(
         <section className="flex-column gap--1">
             <div>
@@ -14,7 +14,7 @@ function KanbanColumn({ name, tasks, setModalContent}) {
                             key={id}
                             task={task}
                             subtasks={task.subtasks}
-                            setModalContent={setModalContent}
+                            toggleModal={toggleModal}
                         />
                     )
                 })
