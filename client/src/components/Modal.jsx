@@ -1,20 +1,22 @@
-// import useModal from "../hook/useModal"
+import BoardForm from "./FormComponents/BoardForm"
 import AddNewTask from "./AddNewTask"
 import CardDetails from "./CardDetails"
 import useLightMode from "../hook/useLightMode"
 import "../styles/modal.scss"
 
 function Modal({ toggleModal, modalType, data }) {
-    const { lightModeModal } = useLightMode()
+    const { lightModeModal, lightModeText } = useLightMode()
     const modalComponents = {
-        "taskDetails": <CardDetails data={data} />,
-        "addNewTask": <AddNewTask />
+        "taskDetails": ['Need to double-check this one', <CardDetails data={data} />],
+        "addNewTask": ['Add New Task', <AddNewTask />],
+        "addBoard": ['Add New Board',  <BoardForm />]
     }
 
     return(
         <section onClick={toggleModal} className="modal-container flex-row flex-row--center">
             <div className={lightModeModal} onClick={e => e.stopPropagation()}>
-                {modalComponents[modalType]}
+                <h2 className={lightModeText}>{modalComponents[modalType][0]}</h2>
+                {modalComponents[modalType][1]}
             </div>
         </section>
     )

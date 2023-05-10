@@ -2,7 +2,7 @@ import useBoardData from "../hook/useBoardData"
 import boardIcon from "../assets/icon-board.svg"
 import "../styles/menu-nav.scss"
 
-function BoardMenu(){
+function BoardMenu({ toggleModal }){
     const { activeBoard, boardList, handleBoardToggle } = useBoardData()
 
     return <section id="board-menu" className="flex-column gap--1">
@@ -27,7 +27,7 @@ function BoardMenu(){
             })
         }
 
-        <div className="board-option board-option--create flex-row">
+        <div onClick={() => toggleModal("addBoard")} className="board-option board-option--create flex-row">
             <img src={boardIcon} alt="Board icon" />
             <h3>+ Create New Board</h3>
         </div>

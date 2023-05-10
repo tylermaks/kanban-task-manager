@@ -27,7 +27,7 @@ function Layout(){
         <BoardProvider>
             <ModeProvider>
                 <main className={sidebar ? "layout layout--show-sidebar" : "layout layout--hide-sidebar"}>
-                    {sidebar && <MenuNav toggleSidebar={toggleSidebar}/>}
+                    {sidebar && <MenuNav toggleSidebar={toggleSidebar} toggleModal={toggleModal}/>}
                     {modal && <Modal toggleModal={toggleModal} modalType={modalType} data={modalData}/>}
                     <TopNav 
                         toggleModal={toggleModal}
