@@ -1,6 +1,6 @@
 import { useState } from "react"
 import useLightMode from "../../hook/useLightMode"
-import FormList from "./FormList"
+import InputList from "./InputList"
 
 function BoardForm(){
     const { lightModeText } = useLightMode()
@@ -21,7 +21,7 @@ function BoardForm(){
                         required
                     />
                 </div>
-                <FormList />
+                <InputList />
             </form>
         </section>
         

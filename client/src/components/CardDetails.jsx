@@ -1,15 +1,5 @@
-import CardOptions from "./CardOptions"
 import useBoardData from "../hook/useBoardData"
 import "../styles/modal.scss"
-
-
-//1. onClick on card to pass specific data -- COMPLETE
-//2. Map data to card detail modal -- COMPLETE
-//3. Create a function that updates the json data when checkbox === true -- COMPLETE
-//4. Open the right modal based on element clicked 
-//5. Add Edit and Delete
-//6. Consider making dropdown into it's own component -- set default option set to the column name
-
 
 function CardDetails({ data, setModal }){
     const { columns, activeBoard, handleRefresh } = useBoardData()
@@ -17,6 +7,7 @@ function CardDetails({ data, setModal }){
     const columnID = columns.findIndex((col) => col.name === data.status) 
     const taskID = columns[columnID].tasks.findIndex(task => task.title === data.title)
 
+ 
     const storeUpdate = () => { 
         localStorage.setItem('appData', JSON.stringify(storedAppData))
         handleRefresh()
@@ -47,11 +38,9 @@ function CardDetails({ data, setModal }){
         setModal(false)
     }
 
+
     return(
         <section className="flex-column gap--2">
-            <div className="flex-row flex-row--space"> 
-                <h2>{data.title}</h2>
-            </div> 
             { data.description  && <p className="body-lg">{data.description}</p>}
             <div>
                 <label>Subtasks </label>
