@@ -5,7 +5,7 @@ function CardOptions({ updateModal, data }){
         <div className="card-options-container">
             <div className= "card-options">
                 <p onClick={() => updateModal('editTask')} className="body-lg">Edit Task</p>
-                <p id="delete" className="body-lg">Delete Task</p>
+                <p onClick={() => updateModal('delete')} className="body-lg">Delete Task</p>
             </div>
         </div>
     )

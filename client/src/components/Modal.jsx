@@ -1,7 +1,8 @@
 import { useState } from "react"
 import BoardForm from "./FormComponents/BoardForm"
-import CardOptions from "./CardOptions"
 import TaskForm from "./FormComponents/TaskForm"
+import DeleteForm from "./FormComponents/DeleteForm"
+import CardOptions from "./CardOptions"
 import CardDetails from "./CardDetails"
 import useLightMode from "../hook/useLightMode"
 import ellipsis from "../assets/icon-vertical-ellipsis.svg"
@@ -18,7 +19,7 @@ function Modal({ toggleModal, modalType, data }) {
         "editTask": ['Edit New Task', <TaskForm data={data}/>],
         "addBoard": ['Add New Board',  <BoardForm />],
         "editBoard": [],
-        "delete": []
+        "delete": [data.title ? "Delete this task?" : "Delete this board? ", <DeleteForm data={data} toggleModal={toggleModal}/>],
     }
 
     const toggleOptions = () => { 
