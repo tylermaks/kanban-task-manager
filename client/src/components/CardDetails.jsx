@@ -2,45 +2,41 @@ import useBoardData from "../hook/useBoardData"
 import "../styles/modal.scss"
 
 function CardDetails({ data, setModal }){
-    const { columns, activeBoard, appData, setAppData, handleRefresh } = useBoardData()
-    const storedAppData = JSON.parse(localStorage.getItem('appData'))
-    const columnID = columns.findIndex((col) => col.name === data.status) 
-    const taskID = columns[columnID].tasks.findIndex(task => task.title === data.title)
-
-    const storeUpdate = () => { 
-        // localStorage.setItem('appData', JSON.stringify(appData))
-        handleRefresh()
-    }
-
-
-    //NEED TO UPDATE APPDATA STATE, THEN SET IT TO LOCAL STORAGE
-    const handleSubtaskUpdate = (e) => {
-        const currentIsCompleted = data.subtasks[e.target.name].isCompleted
-        const filteredAppData = appData.boards[activeBoard].columns[columnID].tasks[taskID].subtasks.filter((subtask) => subtask.title !== e.target.id)
-        // const test = appData.boards[activeBoard].columns[columnID].tasks[taskID].subtasks[e.target.name].isCompleted = !currentIsCompleted
-        // console.log(test)
-        // setAppData(appData.boards[activeBoard].columns[columnID].tasks[taskID].subtasks[e.target.name].isCompleted = !currentIsCompleted)
-        storeUpdate()
-    }
-
-    const handleStatusUpdate = (e) => { 
-        const currentStatus = e.target.value
-        const newColumnID = columns.findIndex((col) => col.name === currentStatus) 
-        const prevTaskList = columns[newColumnID].tasks
-        const newTask = { 
-            title: data.title,
-            description: data.description,
-            status: currentStatus, 
-            subtasks: data.subtasks
+    const { appData, setAppData } = useBoardData()
+    
+    const handleSubtaskUpdate = (e, subtaskIndex) => {
+        const updatedData = { ...appData }
+        const taskToUpdate = updatedData.boards.reduce((foundTask, board) => {
+            const task = board.columns.flatMap(column => column.tasks).find(task => task.title === data.title)
+            return task || foundTask
+        }, null)
+      
+        if (taskToUpdate && taskToUpdate.subtasks[subtaskIndex]) {
+            taskToUpdate.subtasks[subtaskIndex].isCompleted = e.target.checked
         }
-        storedAppData.boards[activeBoard].columns[columnID].tasks.splice(taskID, 1)
-        storedAppData.boards[activeBoard].columns[newColumnID] = { 
-            ...columns[newColumnID],
-            tasks: [...prevTaskList, newTask]
-        }
-        storeUpdate()
-        setModal(false)
+        
+        setAppData(updatedData);
+        localStorage.setItem('appData', JSON.stringify(updatedData));
     }
+
+    // const handleStatusUpdate = (e) => { 
+    //     const currentStatus = e.target.value
+    //     const newColumnID = columns.findIndex((col) => col.name === currentStatus) 
+    //     const prevTaskList = columns[newColumnID].tasks
+    //     const newTask = { 
+    //         title: data.title,
+    //         description: data.description,
+    //         status: currentStatus, 
+    //         subtasks: data.subtasks
+    //     }
+    //     storedAppData.boards[activeBoard].columns[columnID].tasks.splice(taskID, 1)
+    //     storedAppData.boards[activeBoard].columns[newColumnID] = { 
+    //         ...columns[newColumnID],
+    //         tasks: [...prevTaskList, newTask]
+    //     }
+    //     storeUpdate()
+    //     setModal(false)
+    // }
 
     return(
         <section className="flex-column gap--2">
@@ -54,7 +50,7 @@ function CardDetails({ data, setModal }){
                                 <input 
                                     id={subtask.title}
                                     name={id} 
-                                    onChange={handleSubtaskUpdate} 
+                                    onChange={(e) => handleSubtaskUpdate(e, id)} 
                                     checked={subtask.isCompleted} 
                                     className="checkbox" 
                                     type="checkbox" 
@@ -66,7 +62,7 @@ function CardDetails({ data, setModal }){
                 }
             </div>
             <div>
-                <label htmlFor="status">Current Status</label>
+                {/* <label htmlFor="status">Current Status</label>
                 <select name="status"  defaultValue={data.status} onChange={handleStatusUpdate} id="status">
                     {
                         columns && columns.map((column, id) => { 
@@ -75,7 +71,7 @@ function CardDetails({ data, setModal }){
                             )
                         })
                     }
-                </select>
+                </select> */}
             </div>
 
         </section>
