@@ -1,4 +1,5 @@
 function DeleteForm({ data, toggleModal }){
+    console.log(data)
 
     const warningMsg = data ? `${data.title} task and its subtasks` : `${data.name} board`
 

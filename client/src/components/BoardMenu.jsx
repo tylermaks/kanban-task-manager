@@ -3,12 +3,14 @@ import boardIcon from "../assets/icon-board.svg"
 import "../styles/menu-nav.scss"
 
 function BoardMenu({ toggleModal }){
-    const { activeBoard, boardList, handleBoardToggle } = useBoardData()
+    const { activeBoard, boards, handleBoardToggle } = useBoardData()
+
+    //tesing appData --- replace with boardList if unsuccessful
 
     return <section id="board-menu" className="flex-column gap--1">
-        <h4>{`All Boards (${boardList?.length})`}</h4>
+        <h4>{`All Boards (${boards?.length})`}</h4>  
         {
-            boardList && boardList.map((board, id) => {
+            boards && boards.map((board, id) => {
                 return(
                     <div 
                         key={id} 
@@ -26,7 +28,6 @@ function BoardMenu({ toggleModal }){
                 )
             })
         }
-
         <div onClick={() => toggleModal("addBoard")} className="board-option board-option--create flex-row">
             <img src={boardIcon} alt="Board icon" />
             <h3>+ Create New Board</h3>

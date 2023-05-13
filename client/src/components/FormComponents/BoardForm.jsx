@@ -5,6 +5,7 @@ import InputList from "./InputList"
 function BoardForm(){
     const { lightModeText } = useLightMode()
     const [title, setTitle] = useState('')
+    const [inputList, setInputList] = useState([])
 
     return(
         <section>
@@ -21,7 +22,7 @@ function BoardForm(){
                         required
                     />
                 </div>
-                <InputList />
+                <InputList listData={inputList} setListData={setInputList} />
             </form>
         </section>
         

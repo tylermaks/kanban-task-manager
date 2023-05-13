@@ -8,6 +8,7 @@ function KanbanBoard({ sidebar, toggleSidebar, toggleModal }){
     const { lightModeSecondary, lightModeText } = useLightMode()
     const { columns } = useBoardData()
     const kanbanColumns = [1]
+    
 
     return(
         <section 

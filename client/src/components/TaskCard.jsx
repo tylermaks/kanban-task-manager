@@ -9,7 +9,10 @@ function TaskCard({ task, subtasks, toggleModal }){
     }, 0)
 
     return(
-        <div onClick={() => toggleModal("taskDetails", task)} className={`${lightModePrimary} task-card flex-column`}>
+        <div 
+            onClick={() => toggleModal("taskDetails", task)} 
+            className={`${lightModePrimary} task-card flex-column`}
+        >
             <h3 className={lightModeText}>{task.title}</h3 >
             <p className="body-lg">{`${completedsubtasksCount} of ${subtaskCount} subtask complete`}</p>           
         </div>

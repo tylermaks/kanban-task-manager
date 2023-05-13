@@ -6,9 +6,11 @@ const BoardContext = createContext({})
 export const BoardProvider = ({ children }) => {
     const [refreshApp, setRefreshApp] = useState(0)
     const [activeBoard, setActiveBoard] = useState(0)
-    const [appData, setAppData] = useState([])
-    const [boardList, setBoardList] = useState([])
-    const [columns, setColumns] = useState([])
+    const [appData, setAppData] = useState()
+    // const [boardList, setBoardList] = useState([])
+    // const [columns, setColumns] = useState([])
+    const boards = appData?.boards
+    const columns = appData?.boards[activeBoard].columns
    
     useEffect(() => { 
         localStorage.getItem('appData') === null && localStorage.setItem("appData", JSON.stringify(data))
@@ -16,8 +18,8 @@ export const BoardProvider = ({ children }) => {
 
     useEffect(() => {
         const storedAppData = JSON.parse(localStorage.getItem('appData'))
-        setBoardList(storedAppData.boards)
-        setColumns(storedAppData.boards[activeBoard].columns)
+        // setBoardList(storedAppData.boards)
+        // setColumns(storedAppData.boards[activeBoard].columns)
         setAppData(storedAppData)
     }, [activeBoard, refreshApp])
 
@@ -27,6 +29,7 @@ export const BoardProvider = ({ children }) => {
     }
 
     const handleRefresh = () => {
+        localStorage.setItem('appData', JSON.stringify(appData))
         setRefreshApp(refreshApp + 1)
     }
 
@@ -34,9 +37,11 @@ export const BoardProvider = ({ children }) => {
         <BoardContext.Provider value = {{ 
             handleRefresh,
             activeBoard, 
-            boardList,
+            boards,
             columns,
-            setColumns,
+            appData, 
+            setAppData,
+            // setColumns,
             handleBoardToggle 
         }}>
             {children}

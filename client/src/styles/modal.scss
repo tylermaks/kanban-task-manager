@@ -22,10 +22,6 @@
     overflow: scroll;
     position: relative;
 
-    // h2{
-    //     margin-bottom: 2rem;
-    // }
-
     input[type='text'], select, textarea{
         background-color: transparent;
         border: 1px solid rgba(130,143,163, 0.25);
@@ -119,6 +115,11 @@
             color: $mdGrey;
         }
     }
+}
+
+
+.modal-title{
+    margin-bottom: 2rem;
 }
 
 .subtask{

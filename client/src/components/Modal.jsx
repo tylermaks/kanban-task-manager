@@ -19,7 +19,7 @@ function Modal({ toggleModal, modalType, data }) {
         "editTask": ['Edit New Task', <TaskForm data={data}/>],
         "addBoard": ['Add New Board',  <BoardForm />],
         "editBoard": [],
-        "delete": [data.title ? "Delete this task?" : "Delete this board? ", <DeleteForm data={data} toggleModal={toggleModal}/>],
+        "delete": [data ? "Delete this task?" : "Delete this board? ", <DeleteForm data={data} toggleModal={toggleModal}/>],
     }
 
     const toggleOptions = () => { 
@@ -34,7 +34,7 @@ function Modal({ toggleModal, modalType, data }) {
     return(
         <section onClick={toggleModal} className="modal-container flex-row flex-row--center">
             <div className={lightModeModal} onClick={e => e.stopPropagation()}>
-                <div className="flex-row flex-row--space"> 
+                <div className="flex-row flex-row--space modal-title"> 
                     <h2 className={lightModeText}>{modalComponents[useModalType][0]}</h2>
                     {modalType==="taskDetails" &&  <img onClick={toggleOptions} src={ellipsis} alt="Open task options" /> }
                     {cardOptions && <CardOptions data={data} updateModal={updateModal}/>}
