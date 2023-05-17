@@ -4,39 +4,36 @@ import useBoardData from "../../hook/useBoardData"
 import InputList from "./InputList"
 import TaskStatus from "./TaskStatus"
 
-function TaskForm({ data }) {
+function TaskForm({ data, toggleModal }) {
     const { lightModeText } = useLightMode()
-    const { columns, setColumns } = useBoardData()
+    const { columns, addTask } = useBoardData()
+
     const [title, setTitle] = useState(data?.title)
     const [description, setDescription] = useState(data?.description)
     const [subtasks, setSubtaskList] = useState(data?.subtasks)
-    const [status, setStatus] = useState(data?.status)
+    const [status, setStatus] = useState(data?.name)
 
     const placeholderText = {
         title: "e.g. Take coffee break",
         description: "e.g. It's always good to teak a break. This 15 minute break will recharge the batteries"
     }
 
-
     const handleSubmit = (e) => {
         e.preventDefault()
-        const columnID = columns.findIndex((col) => col.name === status)
-        const prevTaskList = columns[columnID].tasks
+        const columnID = status ? columns.findIndex((col) => col.name === status) : 0
         const newTask = { 
             title: title,
-            description: description, 
+            description: description,
+            subtasks: subtasks, 
             status: status,
         }
 
-        columns[columnID] = { 
-            ...columns[columnID],
-            tasks: [...prevTaskList, newTask]
-        }
-
-        setColumns(columns)
+        addTask(columnID, newTask)
         setTitle('')
         setDescription('')
+        setSubtaskList([])
         setStatus('Todo')
+        toggleModal()
     }
 
     return(

@@ -19,7 +19,7 @@ function InputList({ listData, setListData }){
     const updateInput = (e, index) => {
         const { value } = e.target
         const inputValues = [...inputList]
-        inputValues[index] = value
+        inputValues[index] = {title: value, isCompleted: false}
         setListData(inputValues)
     }
 

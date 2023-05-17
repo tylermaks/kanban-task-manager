@@ -15,7 +15,7 @@ function Modal({ toggleModal, modalType, data }) {
 
     const modalComponents = {
         "taskDetails": [data?.title, <CardDetails data={data} toggleModal={toggleModal}/>],
-        "addTask": ['Add New Task', <TaskForm />],
+        "addTask": ['Add New Task', <TaskForm toggleModal={toggleModal}/>],
         "editTask": ['Edit New Task', <TaskForm data={data}/>],
         "addBoard": ['Add New Board',  <BoardForm />],
         "editBoard": [],
