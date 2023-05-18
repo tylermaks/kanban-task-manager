@@ -1,14 +1,14 @@
+import Modal from "./Modal"
 import KanbanColumn from "./KanbanColumn"
 import useLightMode from "../hook/useLightMode"
 import useBoardData from "../hook/useBoardData"
 import showIcon from "../assets/icon-show-sidebar.svg"
 import "../styles/kanban.scss"
 
-function KanbanBoard({ sidebar, toggleSidebar, toggleModal }){
+function KanbanBoard({ sidebar, toggleSidebar }){
     const { lightModeSecondary, lightModeText } = useLightMode()
-    const { columns } = useBoardData()
+    const { columns, modal } = useBoardData()
     const kanbanColumns = [1]
-    
 
     return(
         <section 
@@ -17,6 +17,7 @@ function KanbanBoard({ sidebar, toggleSidebar, toggleModal }){
                 ? `${lightModeSecondary} kanban-grid`
                 : `${lightModeSecondary} flex-row flex-row--center`
             }>
+            {modal && <Modal />}
             <div onClick={toggleSidebar} className={sidebar ? "hidden" : "show-sidebar flex-row flex-row--center"}>
                 <img src={showIcon} alt="Show Sidebar" />
             </div>
@@ -26,9 +27,9 @@ function KanbanBoard({ sidebar, toggleSidebar, toggleModal }){
                         return(
                             <KanbanColumn 
                                 key={id}
+                                columnID={id}
                                 name={column.name}
                                 tasks={column.tasks}
-                                toggleModal={toggleModal}
                             />
                         )
                     }) : (

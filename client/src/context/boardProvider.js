@@ -6,6 +6,10 @@ const BoardContext = createContext({})
 export const BoardProvider = ({ children }) => {
     const [activeBoard, setActiveBoard] = useState(0)
     const [appData, setAppData] = useState()
+    const [modalType, setModalType] = useState('')
+    const [modalData, setModalData] = useState({})
+    const [modal, setModal] = useState(false)
+
     const boards = appData?.boards
     const columns = appData?.boards[activeBoard].columns
     const updatedData = {...appData}
@@ -24,20 +28,24 @@ export const BoardProvider = ({ children }) => {
         setActiveBoard(id)
     }
 
-    const getColumnData = (columnID, taskName) => { 
-        const columnToUpdate = updatedData.boards[activeBoard].columns[columnID]
-        const prevTaskList = columnToUpdate.tasks
-        const taskID = prevTaskList.findIndex(task => task.name === taskName)
-        // const taskToUpdate = prevTaskList[taskID]
+    const toggleModal = (modalType, taskID, columnID) => {
+   
+        const data = updatedData.boards[activeBoard].columns[columnID].tasks[taskID]
+            
 
-        return {columnToUpdate, prevTaskList,  taskID}
+        console.log(data)
+
+        setModalType(modalType)
+        setModalData(data) 
+        setModal(!modal)
     }
 
-    const addTask = (columnID, newTask) => {
-        // const columnToUpdate = updatedData.boards[activeBoard].columns[columnID]
-        // const prevTaskList = columnToUpdate.tasks
-        const { columnToUpdate, prevTaskList } = getColumnData(columnID)
-
+ 
+    const addTask = (status, newTask) => {
+        const columnID = status ? columns.findIndex((col) => col.name === status) : 0
+        const columnToUpdate = updatedData.boards[activeBoard].columns[columnID]
+        const prevTaskList = columnToUpdate.tasks
+        
         updatedData.boards[activeBoard].columns[columnID] = {
             ...columnToUpdate,
             tasks: [...prevTaskList, newTask]
@@ -47,25 +55,28 @@ export const BoardProvider = ({ children }) => {
         localStorage.setItem('appData', JSON.stringify(updatedData));
     }
 
-    //NEED TO FIX HOW THE COLUMN ID IS PASSED FROM THE DELETE MODAL -- MAYBE CREATE STATE TO PASS DATA HERE
-    const deleteTask = (columnID, taskName) => {
-        const { prevTaskList, taskID } = getColumnData(columnID, taskName)
-        prevTaskList.filter(task => task !== taskID)
-        console.log(updatedData)
 
-        // setAppData(updatedData);
-        // localStorage.setItem('appData', JSON.stringify(updatedData));
+    const deleteTask = (data) => {
+        const columnID = updatedData.boards[activeBoard].columns.find(col => col.name === data.status)
+        const taskIndex = updatedData.boards[activeBoard].columns[columnID].tasks.findIndex(task => task.title === data.title)
+       
+        updatedData.boards[activeBoard].columns[columnID].tasks.splice(taskIndex, 1)
+
+        setAppData(updatedData)
+        localStorage.setItem('appData', JSON.stringify(updatedData))
     }
 
     return (
         <BoardContext.Provider value = {{ 
             activeBoard,
             addTask,
-            deleteTask, 
             boards,
             columns,
-            appData, 
-            setAppData,
+            deleteTask,
+            modal,
+            modalType,
+            modalData, 
+            toggleModal, 
             handleBoardToggle 
         }}>
             {children}

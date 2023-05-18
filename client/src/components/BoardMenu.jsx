@@ -2,10 +2,8 @@ import useBoardData from "../hook/useBoardData"
 import boardIcon from "../assets/icon-board.svg"
 import "../styles/menu-nav.scss"
 
-function BoardMenu({ toggleModal }){
-    const { activeBoard, boards, handleBoardToggle } = useBoardData()
-
-    //tesing appData --- replace with boardList if unsuccessful
+function BoardMenu(){
+    const { activeBoard, boards, handleBoardToggle, toggleModal } = useBoardData()
 
     return <section id="board-menu" className="flex-column gap--1">
         <h4>{`All Boards (${boards?.length})`}</h4>  

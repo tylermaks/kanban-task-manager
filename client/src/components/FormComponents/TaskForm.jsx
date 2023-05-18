@@ -6,12 +6,11 @@ import TaskStatus from "./TaskStatus"
 
 function TaskForm({ data, toggleModal }) {
     const { lightModeText } = useLightMode()
-    const { columns, addTask } = useBoardData()
-
+    const { addTask } = useBoardData()
     const [title, setTitle] = useState(data?.title)
     const [description, setDescription] = useState(data?.description)
     const [subtasks, setSubtaskList] = useState(data?.subtasks)
-    const [status, setStatus] = useState(data?.name)
+    const [status, setStatus] = useState(data?.status)
 
     const placeholderText = {
         title: "e.g. Take coffee break",
@@ -20,7 +19,7 @@ function TaskForm({ data, toggleModal }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const columnID = status ? columns.findIndex((col) => col.name === status) : 0
+       
         const newTask = { 
             title: title,
             description: description,
@@ -28,7 +27,7 @@ function TaskForm({ data, toggleModal }) {
             status: status,
         }
 
-        addTask(columnID, newTask)
+        addTask(status, newTask)
         setTitle('')
         setDescription('')
         setSubtaskList([])

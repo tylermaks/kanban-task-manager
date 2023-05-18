@@ -1,22 +1,23 @@
 import useBoardData from "../hook/useBoardData"
 import "../styles/modal.scss"
 
-function CardDetails({ data, setModal }){
-    const { appData, setAppData } = useBoardData()
+function CardDetails(){
+    const { modalData } = useBoardData()
+    console.log(modalData)
     
     const handleSubtaskUpdate = (e, subtaskIndex) => {
-        const updatedData = { ...appData }
-        const taskToUpdate = updatedData.boards.reduce((foundTask, board) => {
-            const task = board.columns.flatMap(column => column.tasks).find(task => task.title === data.title)
-            return task || foundTask
-        }, null)
+        // const updatedData = { ...appData }
+        // const taskToUpdate = updatedData.boards.reduce((foundTask, board) => {
+        //     const task = board.columns.flatMap(column => column.tasks).find(task => task.title === data.title)
+        //     return task || foundTask
+        // }, null)
       
-        if (taskToUpdate && taskToUpdate.subtasks[subtaskIndex]) {
-            taskToUpdate.subtasks[subtaskIndex].isCompleted = e.target.checked
-        }
+        // if (taskToUpdate && taskToUpdate.subtasks[subtaskIndex]) {
+        //     taskToUpdate.subtasks[subtaskIndex].isCompleted = e.target.checked
+        // }
         
-        setAppData(updatedData);
-        localStorage.setItem('appData', JSON.stringify(updatedData));
+        // setAppData(updatedData);
+        // localStorage.setItem('appData', JSON.stringify(updatedData));
     }
 
     // const handleStatusUpdate = (e) => { 
@@ -40,11 +41,11 @@ function CardDetails({ data, setModal }){
 
     return(
         <section className="flex-column gap--2">
-            { data.description  && <p className="body-lg">{data.description}</p>}
+            { modalData.description  && <p className="body-lg">{modalData.description}</p>}
             <div>
                 <label>Subtasks</label>
                 {
-                    data && data?.subtasks.map((subtask, id) => { 
+                    modalData && modalData?.subtasks.map((subtask, id) => { 
                         return(
                             <div key={id} className="checkbox-container flex-row gap--1">   
                                 <input 

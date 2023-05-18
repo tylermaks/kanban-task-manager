@@ -1,7 +1,9 @@
+import useBoardData from "../hook/useBoardData"
 import useLightMode from "../hook/useLightMode"
 import "../styles/top-nav.scss"
 
-function TopNav({ toggleModal }){
+function TopNav(){
+    const { toggleModal } = useBoardData()
     const { lightModePrimary, lightModeText } = useLightMode()
 
     return(

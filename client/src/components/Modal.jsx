@@ -1,4 +1,5 @@
 import { useState } from "react"
+import useBoardData from "../hook/useBoardData"
 import BoardForm from "./FormComponents/BoardForm"
 import TaskForm from "./FormComponents/TaskForm"
 import DeleteForm from "./FormComponents/DeleteForm"
@@ -8,14 +9,14 @@ import useLightMode from "../hook/useLightMode"
 import ellipsis from "../assets/icon-vertical-ellipsis.svg"
 import "../styles/modal.scss"
 
-function Modal({ toggleModal, modalType, data }) {
+function Modal({ toggleModal, data }) {
     const { lightModeModal, lightModeText } = useLightMode()
-    const [useModalType, setUseModalType] = useState(modalType)
+    const { modalType, modalData } = useBoardData()
     const [cardOptions, setCardOptions] = useState(false)
 
     const modalComponents = {
-        "taskDetails": [data?.title, <CardDetails data={data} toggleModal={toggleModal}/>],
-        "addTask": ['Add New Task', <TaskForm toggleModal={toggleModal}/>],
+        "taskDetails": [modalData.title, <CardDetails />],
+        "addTask": ['Add New Task', <TaskForm />],
         "editTask": ['Edit New Task', <TaskForm data={data}/>],
         "addBoard": ['Add New Board',  <BoardForm />],
         "editBoard": [],
@@ -27,7 +28,6 @@ function Modal({ toggleModal, modalType, data }) {
     }
 
     const updateModal = (modalType) => {
-        setUseModalType(modalType)
         setCardOptions(false)
     }
 
@@ -35,11 +35,11 @@ function Modal({ toggleModal, modalType, data }) {
         <section onClick={toggleModal} className="modal-container flex-row flex-row--center">
             <div className={lightModeModal} onClick={e => e.stopPropagation()}>
                 <div className="flex-row flex-row--space modal-title"> 
-                    <h2 className={lightModeText}>{modalComponents[useModalType][0]}</h2>
+                    <h2 className={lightModeText}>{modalComponents[modalType][0]}</h2>
                     {modalType==="taskDetails" &&  <img onClick={toggleOptions} src={ellipsis} alt="Open task options" /> }
                     {cardOptions && <CardOptions data={data} updateModal={updateModal}/>}
                 </div> 
-                {modalComponents[useModalType][1]}
+                {modalComponents[modalType][1]}
             </div>
         </section>
     )
