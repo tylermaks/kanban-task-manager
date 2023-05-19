@@ -3,7 +3,6 @@ import "../styles/modal.scss"
 
 function CardDetails(){
     const { modalData } = useBoardData()
-    console.log(modalData)
     
     const handleSubtaskUpdate = (e, subtaskIndex) => {
         // const updatedData = { ...appData }

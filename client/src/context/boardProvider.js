@@ -29,10 +29,17 @@ export const BoardProvider = ({ children }) => {
     }
 
     const toggleModal = (modalType, taskID, columnID) => {
-   
-        const data = updatedData.boards[activeBoard].columns[columnID].tasks[taskID]
-            
+        let data
+        //get task list if taskID is passed to function, else just get column list 
+        if (taskID && columnID){ 
+            data = updatedData.boards[activeBoard].columns[columnID].tasks[taskID]
+        } else if (!taskID && columnID) { 
+            data = updatedData.boards[activeBoard].columns[columnID]
+        } 
 
+
+        console.log(taskID)
+        console.log(columnID)
         console.log(data)
 
         setModalType(modalType)
